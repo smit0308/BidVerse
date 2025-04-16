@@ -7,7 +7,7 @@ const {
   markAllAsRead,
   getUnreadCount,
 } = require("../controllers/notificationController");
-const { protect } = require("../middleware/authMiddleware");
+const { protect } = require("../middleWare/authMiddleware");
 
 router.post("/", protect, createNotification);
 router.get("/", protect, getNotifications);
