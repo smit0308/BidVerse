@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { registerUser, loginUser, loginStatus, logoutUser, loginAsSeller, estimateIncome, getUser, getUserBalance, getAllUser, verifyEmail } = require("../controllers/userCtr");
 const { protect, isAdmin } = require("../middleWare/authMiddleWare");
-const upload = require("../middleware/fileUpload");
+const upload = require("../middleware/fileUpload.js");
 
 router.post("/register", upload.single('photo'), registerUser);
 router.post("/login", loginUser);
