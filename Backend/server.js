@@ -34,7 +34,7 @@ app.use(
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: 'https://frontend-fnew-cfl6nnu7a-smit0308s-projects.vercel.app/', // Specify the exact origin
+  origin: "*", // Specify the exact origin
   credentials: true // Allow cookies to be sent
 }));
 
