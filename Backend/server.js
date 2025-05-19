@@ -34,7 +34,7 @@ app.use(
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: "https://frontend-finalfnew.onrender.com/", // Specify the exact origin
+  origin: "https://frontend-finalfnew.onrender.com", // Specify the exact origin
   credentials: true // Allow cookies to be sent
 }));
 
