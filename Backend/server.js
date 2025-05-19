@@ -17,6 +17,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 const bidRoute = require("./routes/biddingRoute");
 const balanceRoute = require("./routes/balanceRoutes");
+const { saveDailyRates } = require('./controllers/currencyCtr');
 
 // Connect to MongoDB
 // connectDB();
@@ -34,9 +35,20 @@ app.use(
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: "https://frontend-finalfnew.onrender.com", // Specify the exact origin
-  credentials: true // Allow cookies to be sent
+  origin: "https://frontend-finalfnew.onrender.com",
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'],
+  maxAge: 3600
 }));
+
+// Configure cookie settings for cross-domain requests
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Origin', 'https://frontend-finalfnew.onrender.com/');
+  next();
+});
 
 const PORT = process.env.PORT || 5000;
 
@@ -51,6 +63,9 @@ app.use("/api/bid", bidRoute);
 app.use("/api/balance", balanceRoute);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Save daily currency data when server starts
+saveDailyRates();
 
 // Error Middleware
 // app.use(errorHandler);
